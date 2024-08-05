@@ -39,7 +39,8 @@
   .id {
     margin: 0 0 .6rem .7rem;
     font-size: 0.8rem;
-    color: rgb(97, 94, 94);
+    color: rgb(124, 124, 124);
+    font-weight: 400;
   }
 
   h3 {
@@ -62,9 +63,10 @@
       font-size: 0.8rem;
       text-transform: capitalize;
       display: inline-block;
+      font-weight: 500;
 
       &.normal {
-        background: linear-gradient(135deg, #dcdcdc, #a8a878);
+        background: linear-gradient(135deg, #b6b5b5, #a8a878);
       }
 
       &.fire {
@@ -88,7 +90,7 @@
       }
 
       &.fighting {
-        background: linear-gradient(135deg, #fbd0d8, #c03028);
+        background: linear-gradient(135deg, #bda8ac, #c03028);
       }
 
       &.poison {
@@ -104,7 +106,7 @@
       }
 
       &.psychic {
-        background: linear-gradient(135deg, #f7c5cb, #f85888);
+        background: linear-gradient(135deg, #f88d8d, #f85888);
       }
 
       &.bug {

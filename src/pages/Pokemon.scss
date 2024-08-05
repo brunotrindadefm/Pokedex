@@ -1,0 +1,245 @@
+@import "../components/Variables.scss";
+
+.about-pokemon {
+  @include dCenter;
+  flex-direction: column;
+  border-top-right-radius: 100px;
+  border-top-left-radius: 100px;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+
+  .name-id {
+    display: flex;
+    text-align: center;
+    gap: 1rem;
+    h4 {
+      color: rgb(124, 124, 124);
+      font-size: 2rem;
+      font-weight: 400;
+      @media (max-width: 300px) {
+        font-size: 1.5rem;
+      }
+      @media (max-width: 234px) {
+        font-size: 1.2rem;
+      }
+    }
+    h3 {
+      font-size: 2rem;
+      font-weight: 600;
+      @media (max-width: 300px) {
+        font-size: 1.5rem;
+      }
+      @media (max-width: 234px) {
+        font-size: 1.2rem;
+      }
+    }
+  }
+
+  .img-description {
+    @include dCenter;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    width: 90%;
+
+    img {
+      width: 100%;
+    }
+
+    .type {
+      @include dCenter;
+      border-radius: 5px;
+      color: #fff;
+      font-size: 0.8rem;
+      text-transform: capitalize;
+      display: inline-block;
+      font-weight: 500;
+      padding: 0.5rem 1rem;
+      margin: 0.2rem;
+      transition: 0.2s ease;
+      cursor: context-menu;
+
+      &:hover {
+        transform: scale(1.08);
+      }
+
+      &.normal {
+        background: linear-gradient(135deg, #b6b5b5, #a8a878);
+      }
+
+      &.fire {
+        background: linear-gradient(135deg, orange, #f08030);
+      }
+
+      &.water {
+        background: linear-gradient(135deg, rgb(70, 82, 255), #6890f0);
+      }
+
+      &.electric {
+        background: linear-gradient(135deg, #fdf497, #f8d030);
+      }
+
+      &.grass {
+        background: linear-gradient(135deg, #64f377, #78c850);
+      }
+
+      &.ice {
+        background: linear-gradient(135deg, #b3f7f9, #98d8d8);
+      }
+
+      &.fighting {
+        background: linear-gradient(135deg, #bda8ac, #c03028);
+      }
+
+      &.poison {
+        background: linear-gradient(135deg, #ff8acc, #a040a0);
+      }
+
+      &.ground {
+        background: linear-gradient(135deg, #f1e3d3, #e0c068);
+      }
+
+      &.flying {
+        background: linear-gradient(135deg, #c3d6f2, #a890f0);
+      }
+
+      &.psychic {
+        background: linear-gradient(135deg, #f88d8d, #f85888);
+      }
+
+      &.bug {
+        background: linear-gradient(135deg, #d2d768, #a8b820);
+      }
+
+      &.rock {
+        background: linear-gradient(135deg, #d8c6a3, #b8a038);
+      }
+
+      &.ghost {
+        background: linear-gradient(135deg, #8d6e99, #705898);
+      }
+
+      &.dragon {
+        background: linear-gradient(135deg, #b085f4, #7038f8);
+      }
+
+      &.dark {
+        background: linear-gradient(135deg, #5b4c47, #705848);
+      }
+
+      &.steel {
+        background: linear-gradient(135deg, #c4c4d0, #b8b8d0);
+      }
+
+      &.fairy {
+        background: linear-gradient(135deg, #f7a7b6, #f0b6bc);
+      }
+    }
+
+    .text-about {
+      @include dCenter;
+      width: 100%;
+      background-color: #f4f4f4;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      flex-direction: column;
+      gap: 1rem;
+
+      @media (max-width: 480px) {
+        
+      }
+
+      .about {
+        @include dCenter;
+        justify-content: space-between;
+        width: 60%;
+
+        @media (max-width: 480px) {
+          width: 80%;
+        }
+
+        @media (max-width: 310px) {
+          width: 100%;
+        }
+
+        p {
+          margin: 0.3rem 0 0.3rem 0;
+          font-size: 1.2rem;
+        }
+      }
+
+      .types {
+        @include dCenter;
+        flex-direction: column;
+        width: 100%;
+        gap: 1rem;
+
+        @media (max-width: 480px) {
+          width: 100%;
+        }
+
+        h3 {
+          margin-bottom: 0.3rem;
+        }
+      }
+    }
+  }
+  .stats-container {
+    margin: 1rem 0;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+    h4 {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .stats-list {
+      list-style: none;
+
+      .stats-item {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 0.8rem;
+
+        .stat-name {
+          font-weight: 600;
+          font-size: 1rem;
+          color: #333;
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-bar {
+          background-color: #ddd;
+          border-radius: 4px;
+          overflow: hidden;
+          height: 20px;
+          margin-top: 0.5rem;
+          position: relative;
+
+          .stat-bar-fill {
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            transition: width 0.3s ease-in-out;
+          }
+        }
+
+        .stat-value {
+          font-weight: 400;
+          font-size: 0.9rem;
+          color: #666;
+          margin-top: 0.5rem;
+          text-align: right;
+        }
+      }
+    }
+  }
+}
