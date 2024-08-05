@@ -189,7 +189,7 @@ const Pokemon = () => {
     <div className="app">
       <div className="container">
         <div className="previous-next">
-          <button onClick={handlePreviousPokemon} disabled={!previousPokemon}>
+          <button className="previous" onClick={handlePreviousPokemon} disabled={!previousPokemon}>
             {previousPokemon && (
               <>
                 <GrFormPrevious />
@@ -197,7 +197,7 @@ const Pokemon = () => {
               </>
             )}
           </button>
-          <button onClick={handleNextPokemon} disabled={!nextPokemon}>
+          <button className="next" onClick={handleNextPokemon} disabled={!nextPokemon}>
             {nextPokemon && (
               <>
                 <span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {nextPokemon.id}
