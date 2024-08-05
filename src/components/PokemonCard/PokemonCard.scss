@@ -1,0 +1,29 @@
+@import "../Variables.scss";
+
+.card {
+  @include dCenter;
+  flex-direction: column;
+  width: 250px;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: red;
+  a {
+    width: 100%;
+    img {
+      width: 100%;
+      background-color: #999;
+      margin-bottom: 0.2rem;
+      cursor: pointer;
+      transition: 0.3s;
+      &:hover {
+        transform: scale(1.03);
+      }
+    }
+  }
+  h3 {
+    color: #fff;
+    &::first-letter {
+      text-transform: uppercase;
+    }
+  }
+}

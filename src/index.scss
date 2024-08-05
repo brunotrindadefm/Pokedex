@@ -1,0 +1,21 @@
+@import './components/Variables.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
+.app {
+  flex: 1;
+  @include dCenter;
+  flex-direction: column;
+  width: 100%;
+}
