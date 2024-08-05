@@ -1,8 +1,6 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-import './Home.scss'
-
 import PokemonCard from "../components/PokemonCard/PokemonCard"
 
 const Home = () => {
@@ -45,7 +43,7 @@ const Home = () => {
       <div className="container">
             {data.length === 0 && <p>Loading...</p>}
             {data.length > 0 && data.map((pokemon) => 
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              <PokemonCard  pokemon={pokemon} />
             )}
       </div>
     </div>

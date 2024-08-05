@@ -3,8 +3,6 @@ import { useState, useEffect } from "react";
 
 import axios from "axios";
 
-import './Home.scss'
-
 import PokemonCard from "../components/PokemonCard/PokemonCard";
 
 const Search = () => {
@@ -21,6 +19,11 @@ const Search = () => {
     setLoading(true)
     setError(null)
     setData([])
+
+    if (!query) {
+      setLoading(false);
+      return;
+    }
 
     try {
       const response = await axios.get(`https://pokeapi.co/api/v2/pokemon/${query}`);
@@ -46,7 +49,7 @@ const Search = () => {
       <div className="container">
             {data.length === 0 && <p>Loading...</p>}
             {data.length > 0 && data.map((pokemon) => 
-              <PokemonCard key={pokemon.id} pokemon={pokemon} />
+              <PokemonCard pokemon={pokemon} />
             )}
       </div>
     </div>

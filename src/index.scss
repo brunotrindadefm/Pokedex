@@ -19,3 +19,13 @@
   flex-direction: column;
   width: 100%;
 }
+
+.container {
+  @include dCenter;
+  flex-wrap: wrap;
+  max-width: 1400px;
+  gap: 1rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  background-color: green;
+}
