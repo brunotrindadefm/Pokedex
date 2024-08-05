@@ -13,11 +13,11 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const handleSearch = (e) => {
-      e.preventDefault();
-      if (!search) return;
-
-      navigate(`/search?q=${search}`);
-      setSearch('')
+    e.preventDefault();
+    if (!search) return;
+    const searchTerm = search.toLowerCase();
+    navigate(`/search?q=${searchTerm}`);
+    setSearch('')
   }
 
   return (
@@ -29,7 +29,7 @@ const Navbar = () => {
         </Link>
       </div>
       <form className='form' onSubmit={handleSearch}>
-        <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} placeholder='Pesquise o Pokémon' />
+        <input type="text" onChange={(e) => setSearch(e.target.value)} value={search} placeholder='Search by name or id' />
         <button type='submit'><MdOutlineSearch /></button>
       </form>
     </nav>

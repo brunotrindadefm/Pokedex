@@ -4,6 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Roboto", sans-serif;
 }
 
 #root {
@@ -13,11 +14,16 @@
   width: 100%;
 }
 
+body {
+  background: #f3f4f6;
+}
+
 .app {
   flex: 1;
   @include dCenter;
   flex-direction: column;
   width: 100%;
+  background-color: #F5F5F5
 }
 
 .container {
@@ -26,6 +32,7 @@
   max-width: 1400px;
   gap: 1rem;
   margin: 1rem 0;
+  border-radius: 10px;
   padding: 1rem;
-  background-color: green;
+  background:  #F8F9FA;
 }
