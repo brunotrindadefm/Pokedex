@@ -194,7 +194,7 @@ const Pokemon = () => {
             {previousPokemon && (
               <>
                 <FaArrowLeft />
-                <div><span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {String(pokemon.id).padStart(4, '0')}</div>
+                <div><span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {String(previousPokemon.id).padStart(4, '0')}</div>
                 <CgPokemon className="pokeball"/>
               </>
             )}
@@ -203,7 +203,7 @@ const Pokemon = () => {
             {nextPokemon && (
               <>
                 <CgPokemon className="pokeball"/>
-                <div><span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {String(pokemon.id).padStart(4, '0')}</div>
+                <div><span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {String(nextPokemon.id).padStart(4, '0')}</div>
                 <FaArrowRight />
               </>
             )}

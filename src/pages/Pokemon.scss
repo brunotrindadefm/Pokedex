@@ -367,18 +367,21 @@
     gap: 0.5rem;
     font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    text-align: center;
+
+    div {
+      color: #000;
+    }
 
     svg {
       font-size: 1.2rem;
-     
+
       @media (max-width: 520px) {
-        font-size: .9rem;
+        font-size: 0.9rem;
       }
     }
-   
+
     @media (max-width: 520px) {
-      font-size: .9rem;
+      font-size: 0.9rem;
       span {
         display: none;
       }
