@@ -164,7 +164,7 @@ const Pokemon = () => {
                   ))}
                 </div>
               </div>
-              <p>{description}</p>
+              <p className="info" dangerouslySetInnerHTML={{ __html: description }} />
               <div className="text-about">
                 <div className="about">
                   <div>
@@ -190,7 +190,7 @@ const Pokemon = () => {
                         </span>
                       ))
                     ) : (
-                      <p>No weaknesses available.</p>
+                      <p>No weaknesses </p>
                     )}
                   </div>
                   <div>
@@ -202,7 +202,7 @@ const Pokemon = () => {
                         </span>
                       ))
                     ) : (
-                      <p>No strengths available.</p>
+                      <p>No strengths </p>
                     )}
                   </div>
                 </div>

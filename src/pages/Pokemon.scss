@@ -9,6 +9,21 @@
   height: 100%;
   background-color: #fff;
 
+  .info {
+    font-size: 1.2rem;
+    color: #444;
+    line-height: 1.5;
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    margin: 1rem 0;
+  }
+  
+  .info p {
+    margin: 0;
+  }
+
   .name-id {
     display: flex;
     text-align: center;

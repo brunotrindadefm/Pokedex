@@ -5,6 +5,7 @@ import axios from "axios";
 
 import PokemonCard from "../components/PokemonCard/PokemonCard";
 import Loading from "../components/Loading/Loading";
+import Error from "../components/Error/Error";
 
 const Search = () => {
 
@@ -49,7 +50,7 @@ const Search = () => {
   <div className="app">
       <div className="container">
             {loading  && <Loading />}
-            {error && <p>{error.message}</p>}
+            {error && <Error error={error} query={query} />}
             {data.length > 0 && data.map((pokemon) => 
               <PokemonCard pokemon={pokemon} />
             )}

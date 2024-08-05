@@ -48,13 +48,13 @@ const Home = () => {
 
   return (
     <div className="app">
-      <div className="container">
-      {loading  && <Loading />}
-      {error && <p>{error.message}</p>}
+      <div className="container" key={data.id}>
+        {loading && <Loading />}
+        {error && <p>{error.message}</p>}
         {data.length > 0 && data.map((pokemon) => (
-          <PokemonCard key={pokemon.id} pokemon={pokemon} />
+          <PokemonCard pokemon={pokemon} />
         ))}
-        {!loading && <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button> }
+        {!loading && <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button>}
       </div>
     </div>
   );
