@@ -3,3 +3,24 @@
     justify-content: center;
     align-items: center;
 }
+
+$gradient-normal: linear-gradient(135deg, #b6b5b5, #a8a878);
+$gradient-fire: linear-gradient(135deg, orange, #f08030);
+$gradient-water: linear-gradient(135deg, rgb(70, 82, 255), #6890f0);
+$gradient-electric: linear-gradient(135deg, #fdf497, #f8d030);
+$gradient-grass: linear-gradient(135deg, #64f377, #78c850);
+$gradient-ice: linear-gradient(135deg, #b3f7f9, #98d8d8);
+$gradient-fighting: linear-gradient(135deg, #bda8ac, #c03028);
+$gradient-poison: linear-gradient(135deg, #ff8acc, #a040a0);
+$gradient-ground: linear-gradient(135deg, #f1e3d3, #e0c068);
+$gradient-flying: linear-gradient(135deg, #c3d6f2, #a890f0);
+$gradient-psychic: linear-gradient(135deg, #f88d8d, #f85888);
+$gradient-bug: linear-gradient(135deg, #d2d768, #a8b820);
+$gradient-rock: linear-gradient(135deg, #d8c6a3, #b8a038);
+$gradient-ghost: linear-gradient(135deg, #8d6e99, #705898);
+$gradient-dragon: linear-gradient(135deg, #b085f4, #7038f8);
+$gradient-dark: linear-gradient(135deg, #5b4c47, #705848);
+$gradient-steel: linear-gradient(135deg, #c4c4d0, #b8b8d0);
+$gradient-fairy: linear-gradient(135deg, #f7a7b6, #f0b6bc);
+
+$gradient-hover: linear-gradient(to right, #a1c4fd, #c2e9fb);

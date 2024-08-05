@@ -3,8 +3,8 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import './Pokemon.scss';
 
-import { MdNavigateNext } from "react-icons/md";
-import { GrFormPrevious } from "react-icons/gr";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { CgPokemon } from "react-icons/cg";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -136,8 +136,8 @@ const Pokemon = () => {
   const getPreviousAndNextPokemon = async () => {
     try {
       const currentId = parseInt(id, 10);
-      const prevId = currentId > 1 ? currentId - 1 : null;
-      const nextId = currentId < 1025 ? currentId + 1 : null;
+      const prevId = currentId > 1 ? currentId - 1 : 1025;
+      const nextId = currentId < 1025 ? currentId + 1 : 1;
 
       const responsePrevious = await axios.get(`https://pokeapi.co/api/v2/pokemon/${prevId}`)
       setPreviousPokemon(responsePrevious.data)
@@ -189,19 +189,22 @@ const Pokemon = () => {
     <div className="app">
       <div className="container">
         <div className="previous-next">
-          <button className="previous" onClick={handlePreviousPokemon} disabled={!previousPokemon}>
+          <button className={`previous ${previousPokemon?.types?.[0]?.type?.name}`} onClick={handlePreviousPokemon} 
+          >
             {previousPokemon && (
               <>
-                <GrFormPrevious />
-                <span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {previousPokemon.id}
+                <FaArrowLeft />
+                <div><span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {String(pokemon.id).padStart(4, '0')}</div>
+                <CgPokemon className="pokeball"/>
               </>
             )}
           </button>
-          <button className="next" onClick={handleNextPokemon} disabled={!nextPokemon}>
+          <button  className={`next ${nextPokemon?.types?.[0]?.type?.name}`} onClick={handleNextPokemon} >
             {nextPokemon && (
               <>
-                <span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {nextPokemon.id}
-                <MdNavigateNext />
+                <CgPokemon className="pokeball"/>
+                <div><span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {String(pokemon.id).padStart(4, '0')}</div>
+                <FaArrowRight />
               </>
             )}
           </button>
@@ -210,7 +213,7 @@ const Pokemon = () => {
           <div className="about-pokemon">
             <div className="name-id">
               <h3>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
-              <h4 className='id'>N° {String(pokemon.id).padStart(3, '0')}</h4>
+              <h4 className='id'>N° {String(pokemon.id).padStart(4, '0')}</h4>
             </div>
             <div className="img-description">
               <div>

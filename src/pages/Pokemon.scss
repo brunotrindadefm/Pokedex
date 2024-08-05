@@ -3,8 +3,8 @@
 .about-pokemon {
   @include dCenter;
   flex-direction: column;
-  border-top-right-radius: 100px;
-  border-top-left-radius: 100px;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
   width: 100%;
   height: 100%;
   background-color: #fff;
@@ -19,12 +19,13 @@
     background-color: #f9f9f9;
     margin: 1rem 0;
   }
-  
+
   .info p {
     margin: 0;
   }
 
   .name-id {
+    margin: 1rem 0;
     display: flex;
     text-align: center;
     gap: 1rem;
@@ -164,7 +165,6 @@
       gap: 1rem;
 
       @media (max-width: 480px) {
-        
       }
 
       .about {
@@ -259,50 +259,137 @@
   }
 }
 
-
 .previous-next {
   width: 100%;
   display: flex;
-  justify-content: space-between; 
-  margin-bottom: 1rem;
+  justify-content: space-between;
+
+  .previous {
+    background: $gradient-fire;
+    border-bottom-right-radius: 50px;
+    transition: background 0.4s ease;
+
+    &:hover {
+      background: $gradient-hover;
+    }
+  }
 
   .next {
-    border-bottom-left-radius: 50px; 
+    background: $gradient-fire;
+    border-bottom-left-radius: 50px;
+    transition: background 0.4s ease;
+
+    &:hover {
+      background: $gradient-hover;
+    }
   }
-  .previous {
-    border-bottom-right-radius: 50px; 
+
+  .normal {
+    background: $gradient-normal;
+  }
+
+  .fire {
+    background: $gradient-fire;
+  }
+
+  .water {
+    background: $gradient-water;
+  }
+
+  .electric {
+    background: $gradient-electric;
+  }
+
+  .grass {
+    background: $gradient-grass;
+  }
+
+  .ice {
+    background: $gradient-ice;
+  }
+
+  .fighting {
+    background: $gradient-fighting;
+  }
+
+  .poison {
+    background: $gradient-poison;
+  }
+
+  .ground {
+    background: $gradient-ground;
+  }
+
+  .flying {
+    background: $gradient-flying;
+  }
+
+  .psychic {
+    background: $gradient-psychic;
+  }
+
+  .bug {
+    background: $gradient-bug;
+  }
+
+  .rock {
+    background: $gradient-rock;
+  }
+
+  .ghost {
+    background: $gradient-ghost;
+  }
+
+  .dragon {
+    background: $gradient-dragon;
+  }
+
+  .dark {
+    background: $gradient-dark;
+  }
+
+  .steel {
+    background: $gradient-steel;
+  }
+
+  .fairy {
+    background: $gradient-fairy;
   }
 
   button {
     width: 49.8%;
     cursor: pointer;
-    padding: .8rem;
+    padding: 0.8rem;
     border: none;
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px; 
-    display: flex;
-    align-items: center; 
-    justify-content: center; 
+    border-radius: 8px;
+    @include dCenter;
+    justify-content: space-between;
     gap: 0.5rem;
-    font-size: 1rem; 
-    transition: 0.4s;
+    font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-
-    &:hover {
-      background: linear-gradient(to right, #a1c4fd, #c2e9fb); 
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-      opacity: 0.6; 
-    }
+    text-align: center;
 
     svg {
-      font-size: 1.5rem; 
+      font-size: 1.2rem;
+     
+      @media (max-width: 520px) {
+        font-size: .9rem;
+      }
     }
+   
     @media (max-width: 520px) {
-      width: 50%;
+      font-size: .9rem;
       span {
+        display: none;
+      }
+      .pokeball {
+        display: none;
+      }
+      justify-content: center;
+      gap: 1rem;
+    }
+    @media (max-width: 250px) {
+      div {
         display: none;
       }
     }

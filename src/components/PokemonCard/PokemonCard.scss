@@ -72,75 +72,75 @@
       font-weight: 500;
 
       &.normal {
-        background: linear-gradient(135deg, #b6b5b5, #a8a878);
+        background: $gradient-normal;
       }
 
       &.fire {
-        background: linear-gradient(135deg, orange, #f08030);
+        background: $gradient-fire;
       }
 
       &.water {
-        background: linear-gradient(135deg, rgb(70, 82, 255), #6890f0);
+        background: $gradient-water;
       }
 
       &.electric {
-        background: linear-gradient(135deg, #fdf497, #f8d030);
+        background: $gradient-electric;
       }
 
       &.grass {
-        background: linear-gradient(135deg, #64f377, #78c850);
+        background: $gradient-grass;
       }
 
       &.ice {
-        background: linear-gradient(135deg, #b3f7f9, #98d8d8);
+        background: $gradient-ice;
       }
 
       &.fighting {
-        background: linear-gradient(135deg, #bda8ac, #c03028);
+        background: $gradient-fighting;
       }
 
       &.poison {
-        background: linear-gradient(135deg, #ff8acc, #a040a0);
+        background: $gradient-poison;
       }
 
       &.ground {
-        background: linear-gradient(135deg, #f1e3d3, #e0c068);
+        background: $gradient-ground;
       }
 
       &.flying {
-        background: linear-gradient(135deg, #c3d6f2, #a890f0);
+        background: $gradient-flying;
       }
 
       &.psychic {
-        background: linear-gradient(135deg, #f88d8d, #f85888);
+        background: $gradient-psychic;
       }
 
       &.bug {
-        background: linear-gradient(135deg, #d2d768, #a8b820);
+        background: $gradient-bug;
       }
 
       &.rock {
-        background: linear-gradient(135deg, #d8c6a3, #b8a038);
+        background: $gradient-rock;
       }
 
       &.ghost {
-        background: linear-gradient(135deg, #8d6e99, #705898);
+        background: $gradient-ghost;
       }
 
       &.dragon {
-        background: linear-gradient(135deg, #b085f4, #7038f8);
+        background: $gradient-dragon;
       }
 
       &.dark {
-        background: linear-gradient(135deg, #5b4c47, #705848);
+        background: $gradient-dark;
       }
 
       &.steel {
-        background: linear-gradient(135deg, #c4c4d0, #b8b8d0);
+        background: $gradient-steel;
       }
 
       &.fairy {
-        background: linear-gradient(135deg, #f7a7b6, #f0b6bc);
+        background: $gradient-fairy;
       }
     }
   }
