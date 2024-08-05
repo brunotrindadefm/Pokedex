@@ -1,10 +1,16 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import './Pokemon.scss';
+
+import { MdNavigateNext } from "react-icons/md";
+import { GrFormPrevious } from "react-icons/gr";
 
 const Pokemon = () => {
   const { id } = useParams();
+
+  const navigate = useNavigate();
+
   const [pokemon, setPokemon] = useState(null);
   const [description, setDescription] = useState(null);
   const [weaknesses, setWeaknesses] = useState([]);
@@ -12,6 +18,9 @@ const Pokemon = () => {
   const [category, setCategory] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [nextPokemon, setNextPokemon] = useState(null)
+  const [previousPokemon, setPreviousPokemon] = useState(null)
 
   const getPokemon = async () => {
     setLoading(true);
@@ -124,6 +133,35 @@ const Pokemon = () => {
     }
   };
 
+  const getPreviousAndNextPokemon = async () => {
+    try {
+      const currentId = parseInt(id, 10);
+      const prevId = currentId > 1 ? currentId - 1 : null;
+      const nextId = currentId < 1025 ? currentId + 1 : null;
+
+      const responsePrevious = await axios.get(`https://pokeapi.co/api/v2/pokemon/${prevId}`)
+      setPreviousPokemon(responsePrevious.data)
+
+      const responseNext = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nextId}`)
+      setNextPokemon(responseNext.data)
+
+    } catch (error) {
+      console.error('Error determining previous and next Pokémon:', error);
+    }
+  };
+
+  const handlePreviousPokemon = () => {
+    if (previousPokemon) {
+      navigate(`/pokemon/${previousPokemon.id}`);
+    }
+  };
+
+  const handleNextPokemon = () => {
+    if (nextPokemon) {
+      navigate(`/pokemon/${nextPokemon.id}`);
+    }
+  };
+
   useEffect(() => {
     getPokemon();
   }, [id]);
@@ -131,6 +169,7 @@ const Pokemon = () => {
   useEffect(() => {
     if (pokemon) {
       getPokemonDescription();
+      getPreviousAndNextPokemon();
       getPokemonWeaknesses(pokemon.types);
       getPokemonStrengths(pokemon.types);
     }
@@ -144,9 +183,29 @@ const Pokemon = () => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
+  console.log(nextPokemon)
+
   return (
     <div className="app">
       <div className="container">
+        <div className="previous-next">
+          <button onClick={handlePreviousPokemon} disabled={!previousPokemon}>
+            {previousPokemon && (
+              <>
+                <GrFormPrevious />
+                <span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {previousPokemon.id}
+              </>
+            )}
+          </button>
+          <button onClick={handleNextPokemon} disabled={!nextPokemon}>
+            {nextPokemon && (
+              <>
+                <span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {nextPokemon.id}
+                <MdNavigateNext />
+              </>
+            )}
+          </button>
+        </div>
         {pokemon && (
           <div className="about-pokemon">
             <div className="name-id">
@@ -218,7 +277,7 @@ const Pokemon = () => {
                     <div className="stat-bar">
                       <div
                         className="stat-bar-fill"
-                        style={{ width: `${stat.base_stat / 2}%` }} 
+                        style={{ width: `${stat.base_stat / 2}%` }}
                       >
                       </div>
                     </div>
