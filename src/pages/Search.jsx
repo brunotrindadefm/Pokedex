@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import PokemonCard from "../components/PokemonCard/PokemonCard";
+import Loading from "../components/Loading/Loading";
 
 const Search = () => {
 
@@ -47,7 +48,8 @@ const Search = () => {
   return (
   <div className="app">
       <div className="container">
-            {data.length === 0 && <p>Loading...</p>}
+            {loading  && <Loading />}
+            {error && <p>{error.message}</p>}
             {data.length > 0 && data.map((pokemon) => 
               <PokemonCard pokemon={pokemon} />
             )}

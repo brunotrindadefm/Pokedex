@@ -3,6 +3,7 @@ import axios from "axios";
 import PokemonCard from "../components/PokemonCard/PokemonCard";
 
 import './Home.scss'
+import Loading from "../components/Loading/Loading";
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -48,12 +49,12 @@ const Home = () => {
   return (
     <div className="app">
       <div className="container">
-        {loading && <p>Loading...</p>}
-        {error && <p>Error: {error.message}</p>}
+      {loading  && <Loading />}
+      {error && <p>{error.message}</p>}
         {data.length > 0 && data.map((pokemon) => (
           <PokemonCard key={pokemon.id} pokemon={pokemon} />
         ))}
-        <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button>
+        {!loading && <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button> }
       </div>
     </div>
   );
