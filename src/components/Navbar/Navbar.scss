@@ -11,6 +11,7 @@
 
   @media(max-width:  560px) {
     flex-direction: column;
+    gap: 1rem;
   }
   .title {
     a {
@@ -20,10 +21,16 @@
       svg {
         font-size: 2rem;
         color: red;
+        @media(max-width:  560px) {
+          font-size: 1.3rem;
+        }
       }
       h1 {
         font-size: 1.7rem;
         color: #000;
+        @media(max-width:  560px) {
+          font-size: 1.3rem;
+        }
       }
       span {
         color: red;
@@ -33,11 +40,20 @@
   .form {
     display: flex;
     gap: 0.3rem;
+    @media(max-width:  250px) {
+      flex-direction: column;
+    }
     input {
       padding: 0.4rem 0.8rem;
       border-radius: 4px;
       border: none;
-    }
+      @media(max-width:  560px) {
+        padding: 0.2rem 0.5rem;
+      }
+      @media(max-width:  250px) {
+        padding: .5rem .5rem;
+      }
+        }
     button {
       @include dCenter;
       font-size: 1rem;

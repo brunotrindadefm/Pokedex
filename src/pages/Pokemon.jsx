@@ -227,10 +227,6 @@ const Pokemon = () => {
                 ))}
               </ul>
             </div>
-            <div>
-              <h4>Moves:</h4>
-              <p>{pokemon.moves.slice(0, 10).map(move => move.move.name).join(', ')}</p>
-            </div>
           </div>
         )}
       </div>

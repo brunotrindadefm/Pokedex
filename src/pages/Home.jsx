@@ -9,7 +9,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [limit, setLimit] = useState(25);
+  const [limit, setLimit] = useState(24);
   const [offset, setOffset] = useState(0);
 
   const getPokemons = async () => {
