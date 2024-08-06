@@ -229,7 +229,7 @@ const Pokemon = () => {
   };
 
   const hasEvolution = evolutionImages.length > 0;
-  const isSingleEvolution = hasEvolution && evolutionImages.length === 1;
+  const isSingleEvolution = hasEvolution && evolutionImages.length === 1 || evolutionImages.length === 0;
   const isTwoEvolutions = hasEvolution && evolutionImages.length === 2;
 
   return (
@@ -340,7 +340,7 @@ const Pokemon = () => {
               <h4>Evolutions</h4>
               {evolutionImages.length > 0 ? (
                 <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`}>
-                 {isSingleEvolution && <p>No has evolution</p>}
+                  {isSingleEvolution && <p>No has evolution</p>}
                   {evolutionImages.map((evolution, index) => (
                     <div key={index}>
                       <img src={evolution.image} alt={evolution.name} />
@@ -356,7 +356,18 @@ const Pokemon = () => {
                   ))}
                 </div>
               ) : (
-                <p>No evolution images available.</p>
+                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`}>
+                  <p>No has evolution</p>
+                  <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} />
+                  <p>{capitalizeFirstLetter(pokemon.name)}</p>
+                  <div className="types">
+                    {pokemon.types.map((type) => (
+                      <span key={type.type.name} className={`type ${type.type.name}`}>
+                        {type.type.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           </div>
