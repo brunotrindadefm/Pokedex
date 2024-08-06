@@ -14,7 +14,7 @@ const Home = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const [limit, setLimit] = useState(24);
+  const [limit, setLimit] = useState(18);
   const [offset, setOffset] = useState(0);
 
   const getPokemons = async () => {
@@ -32,8 +32,13 @@ const Home = () => {
       );
       const detailsResponses = await Promise.all(pokemonDetailsPromises);
       const pokemonDetails = detailsResponses.map((res) => res.data);
-
-      setData((prevData) => [...prevData, ...pokemonDetails]); // Concatena com os pokemons que já estão no data
+      
+      setData(prevData => {
+        // Filtra dados já existentes para evitar duplicação
+        const existingPokemonIds = new Set(prevData.map(pokemon => pokemon.id));
+        const newPokemons = pokemonDetails.filter(pokemon => !existingPokemonIds.has(pokemon.id));
+        return [...prevData, ...newPokemons];
+      });
     } catch (err) {
       setError(err);
       console.log(err);
@@ -54,9 +59,9 @@ const Home = () => {
   return (
     <div className="app">
       <div className="container" data-aos="fade-in" data-aos-duration="1000" key={data.id}>
-        {loading && <Loading />}
+        {data.length === 0 && loading && <Loading />}
         {error && <p>{error.message}</p>}
-        {!loading && data.length > 0 && data.map((pokemon) => (
+        {data.length > 0 && data.map((pokemon) => (
           <PokemonCard pokemon={pokemon} />
         ))}
       </div>

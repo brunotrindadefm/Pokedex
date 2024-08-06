@@ -342,7 +342,6 @@ const Pokemon = () => {
                     <span className="stat-name">{capitalizeFirstLetter(stat.stat.name)}:</span>
                     <div className="stat-bar" >
                       <div
-                        data-aos="fade-in"
                         className="stat-bar-fill"
                         style={{ width: `${stat.base_stat / 2}%` }}
                       >
@@ -355,13 +354,14 @@ const Pokemon = () => {
             </div>
             <div className={`evolution-chain ${isTwoEvolutions ? 'two-evolutions' : ''} ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000" >
               <h4>Evolutions</h4>
+              {isSingleEvolution && <h5>No has evolution</h5>}
               {evolutionImages.length > 0 ? (
                 <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000">
-                  {isSingleEvolution && <p>No has evolution</p>}
                   {evolutionImages.map((evolution, index) => (
                     <div key={index}>
                       <img src={evolution.image} alt={evolution.name} onClick={() => handleClickedPokemon(evolution.id)} />
-                      <p>{capitalizeFirstLetter(evolution.name)}</p>
+                      <p className="id-name">{capitalizeFirstLetter(evolution.name)}
+                      <span>N° {String(evolution.id).padStart(4, '0')}</span></p>
                       <div className="types">
                         {evolution.types.map((type, typeIndex) => (
                           <span key={typeIndex} className={`type ${type}`}>
@@ -374,9 +374,9 @@ const Pokemon = () => {
                 </div>
               ) : (
                 <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000">
-                  <p>No has evolution</p>
                   <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} onClick={() => handleClickedPokemon(pokemon.id)} />
-                  <p>{capitalizeFirstLetter(pokemon.name)}</p>
+                  <p className="id-name">{capitalizeFirstLetter(pokemon.name)}
+                    <span>N° {String(pokemon.id).padStart(4, '0')}</span></p>
                   <div className="types">
                     {pokemon.types.map((type) => (
                       <span key={type.type.name} className={`type ${type.type.name}`}>

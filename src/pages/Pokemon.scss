@@ -276,6 +276,7 @@
     &.single-evolution {
       width: 500px;
       flex-direction: column;
+      
       @media(max-width: 900px) {
         width: 55%;
       }
@@ -284,10 +285,13 @@
       }
     }
 
+    h5 {
+      margin-top: .5rem;
+      font-size: 1rem;
+    }
 
     h4 {
       font-size: 1.5rem;
-      margin-bottom: .3rem;
     }
 
     .evolution-list {
@@ -298,13 +302,21 @@
       width: 90%;
       @media(max-width: 900px) {
         flex-direction: column;
-        gap: 2rem;
       }
-      p {
-        font-size: 1.5rem;
-        margin: .3rem 0;
-        
+      .id-name {
+          margin-bottom: .3rem;
+          align-self: center;
+          font-size: 1rem;
+          margin: .8rem 0;
+          @media(max-width: 250px) {
+            font-size: .8rem;
+          }
+          span {
+            color: grey;
+            margin-left: .5rem;
+          }
       }
+
       img {
         width: 230px; 
         background-color: #ddd;
@@ -323,6 +335,7 @@
       }
 
       .type {
+        margin-bottom: 1rem;
         @include typeStyles;
   
         &.normal {
@@ -410,6 +423,7 @@
     background: #b6b5b5;
     border-bottom-right-radius: 50px;
     transition: background 0.4s ease;
+    color: #000;
 
     &:hover {
       background: $gradient-hover;
@@ -437,6 +451,15 @@
     gap: 0.5rem;
     font-size: 1rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+
+    button:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.3);
+    }
+    
+    button:active {
+      background: darken(#b6b5b5, 10%);
+    }    
 
     div {
       color: #000;
