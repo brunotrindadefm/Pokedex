@@ -14,7 +14,6 @@ const Error = ({error, query}) => {
         query = `${query.substring(0,15)}...`
     }
 
-
   useEffect(() => {
     AOS.init();
   },[])

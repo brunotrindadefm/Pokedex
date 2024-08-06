@@ -231,6 +231,7 @@
             width: 0%;
             transition: width 0.3s ease-in-out;
           }
+          
         }
 
         .stat-value {
@@ -311,6 +312,7 @@
         border-radius: 50%;
         padding: 1rem;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
         @media(max-width: 330px) {
           width: 100%
         }

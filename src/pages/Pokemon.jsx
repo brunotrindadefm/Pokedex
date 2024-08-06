@@ -151,13 +151,16 @@ const Pokemon = () => {
             // Requisição para obter os dados do Pokémon
             const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${current.species.name}`);
 
-            // Extrair os tipos do Pokémon
-            const types = pokemonResponse.data.types.map(type => type.type.name);
 
+            // Extrair o ID do Pokémon da resposta
+            const id = pokemonResponse.data.id;
+
+            // Adicionar o Pokémon à lista de imagens
             images.push({
+              id: id, // Usar o ID correto
               name: current.species.name,
               image: pokemonResponse.data.sprites.other['official-artwork'].front_default,
-              types: types
+              types: pokemonResponse.data.types.map(type => type.type.name)
             });
 
             // Mover para o próximo Pokémon na cadeia de evolução
@@ -211,6 +214,13 @@ const Pokemon = () => {
     }
   };
 
+  const handleClickedPokemon = (pokemonId) => {
+    console.log("Clicked Pokémon ID:", pokemonId);
+    if (pokemonId) {
+      navigate(`/pokemon/${pokemonId}`)
+    }
+  };
+
   useEffect(() => {
     getPokemon();
   }, [id]);
@@ -227,7 +237,7 @@ const Pokemon = () => {
 
   useEffect(() => {
     AOS.init();
-  },[]);
+  }, []);
 
   const capitalizeFirstLetter = (string) => string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
 
@@ -238,9 +248,9 @@ const Pokemon = () => {
   return (
     <div className="app">
       <div className="container">
-      {loading && <Loading />}
-      {error && <Error />}
-        <div className="previous-next" data-aos="fade-in" data-aos-duration="1000">
+        {loading && <Loading />}
+        {error && <p>{error.message}</p>}
+        {!error && !loading && <div className="previous-next" data-aos="fade-in" data-aos-duration="1000">
           <button className={`previous ${previousPokemon?.types?.[0]?.type?.name}`} onClick={handlePreviousPokemon}
           >
             {previousPokemon && (
@@ -261,7 +271,8 @@ const Pokemon = () => {
             )}
           </button>
         </div>
-        {pokemon && (
+        }
+        {!error && !loading && pokemon && (
           <div className="about-pokemon" >
             <div className="name-id" data-aos="fade-in" data-aos-duration="1000">
               <h3>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
@@ -278,7 +289,7 @@ const Pokemon = () => {
                   ))}
                 </div>
               </div>
-              <p className="info" dangerouslySetInnerHTML={{ __html: description }}  data-aos="fade-in" data-aos-duration="1000"/>
+              <p className="info" dangerouslySetInnerHTML={{ __html: description }} data-aos="fade-in" data-aos-duration="1000" />
               <div className="text-about">
                 <div className="about" data-aos="fade-in" data-aos-duration="1000">
                   <div>
@@ -329,8 +340,9 @@ const Pokemon = () => {
                 {pokemon.stats.map(stat => (
                   <li key={stat.stat.name} className="stats-item">
                     <span className="stat-name">{capitalizeFirstLetter(stat.stat.name)}:</span>
-                    <div className="stat-bar" data-aos="fade-in" data-aos-duration="1000">
+                    <div className="stat-bar" >
                       <div
+                        data-aos="fade-in"
                         className="stat-bar-fill"
                         style={{ width: `${stat.base_stat / 2}%` }}
                       >
@@ -348,7 +360,7 @@ const Pokemon = () => {
                   {isSingleEvolution && <p>No has evolution</p>}
                   {evolutionImages.map((evolution, index) => (
                     <div key={index}>
-                      <img src={evolution.image} alt={evolution.name} />
+                      <img src={evolution.image} alt={evolution.name} onClick={() => handleClickedPokemon(evolution.id)} />
                       <p>{capitalizeFirstLetter(evolution.name)}</p>
                       <div className="types">
                         {evolution.types.map((type, typeIndex) => (
@@ -363,7 +375,7 @@ const Pokemon = () => {
               ) : (
                 <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000">
                   <p>No has evolution</p>
-                  <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name}  />
+                  <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} onClick={() => handleClickedPokemon(pokemon.id)} />
                   <p>{capitalizeFirstLetter(pokemon.name)}</p>
                   <div className="types">
                     {pokemon.types.map((type) => (
