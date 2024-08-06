@@ -64,21 +64,7 @@
     }
 
     .type {
-      @include dCenter;
-      border-radius: 5px;
-      color: #fff;
-      font-size: 0.8rem;
-      text-transform: capitalize;
-      display: inline-block;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      margin: 0.2rem;
-      transition: 0.2s ease;
-      cursor: context-menu;
-
-      &:hover {
-        transform: scale(1.08);
-      }
+      @include typeStyles;
 
       &.normal {
         background: linear-gradient(135deg, #b6b5b5, #a8a878);
@@ -257,6 +243,160 @@
       }
     }
   }
+
+  .evolution-chain {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    flex-direction: column;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
+    width: 100%;
+    @media(max-width: 900px) {
+      width: 50%;
+    }
+    @media(max-width: 540px) {
+      width: 100%;
+    }
+
+    &.two-evolutions {
+      width: 70%;
+      @media(max-width: 900px) {
+        width: 50%;
+      }
+      @media(max-width: 540px) {
+        width: 100%;
+      }
+    }
+
+    &.single-evolution {
+      width: 60%;
+      flex-direction: column;
+      @media(max-width: 900px) {
+        width: 50%;
+      }
+      @media(max-width: 540px) {
+        width: 100%;
+      }
+    }
+
+
+    h4 {
+      font-size: 1.5rem;
+      margin-bottom: .3rem;
+    }
+
+    .evolution-list {
+      @include dCenter;
+      text-align: center;
+      margin-top: 1rem;
+      justify-content: space-between;
+      width: 90%;
+      @media(max-width: 900px) {
+        flex-direction: column;
+        gap: 2rem;
+      }
+      p {
+        font-size: 1.5rem;
+        margin: .3rem 0;
+        
+      }
+      img {
+        width: 230px; 
+        background-color: #ddd;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        @media(max-width: 330px) {
+          width: 100%
+        }
+      }
+
+      &.single-evolution {
+        flex-direction: column
+      }
+
+      .type {
+        @include typeStyles;
+  
+        &.normal {
+          background: linear-gradient(135deg, #b6b5b5, #a8a878);
+        }
+  
+        &.fire {
+          background: linear-gradient(135deg, orange, #f08030);
+        }
+  
+        &.water {
+          background: linear-gradient(135deg, rgb(70, 82, 255), #6890f0);
+        }
+  
+        &.electric {
+          background: linear-gradient(135deg, #fdf497, #f8d030);
+        }
+  
+        &.grass {
+          background: linear-gradient(135deg, #64f377, #78c850);
+        }
+  
+        &.ice {
+          background: linear-gradient(135deg, #b3f7f9, #98d8d8);
+        }
+  
+        &.fighting {
+          background: linear-gradient(135deg, #bda8ac, #c03028);
+        }
+  
+        &.poison {
+          background: linear-gradient(135deg, #ff8acc, #a040a0);
+        }
+  
+        &.ground {
+          background: linear-gradient(135deg, #f1e3d3, #e0c068);
+        }
+  
+        &.flying {
+          background: linear-gradient(135deg, #c3d6f2, #a890f0);
+        }
+  
+        &.psychic {
+          background: linear-gradient(135deg, #f88d8d, #f85888);
+        }
+  
+        &.bug {
+          background: linear-gradient(135deg, #d2d768, #a8b820);
+        }
+  
+        &.rock {
+          background: linear-gradient(135deg, #d8c6a3, #b8a038);
+        }
+  
+        &.ghost {
+          background: linear-gradient(135deg, #8d6e99, #705898);
+        }
+  
+        &.dragon {
+          background: linear-gradient(135deg, #b085f4, #7038f8);
+        }
+  
+        &.dark {
+          background: linear-gradient(135deg, #5b4c47, #705848);
+        }
+  
+        &.steel {
+          background: linear-gradient(135deg, #c4c4d0, #b8b8d0);
+        }
+  
+        &.fairy {
+          background: linear-gradient(135deg, #f7a7b6, #f0b6bc);
+        }
+      }
+    }
+  }
 }
 
 .previous-next {
@@ -265,7 +405,7 @@
   justify-content: space-between;
 
   .previous {
-    background: $gradient-fire;
+    background: #b6b5b5;
     border-bottom-right-radius: 50px;
     transition: background 0.4s ease;
 
@@ -275,85 +415,13 @@
   }
 
   .next {
-    background: $gradient-fire;
+    background: #b6b5b5;
     border-bottom-left-radius: 50px;
     transition: background 0.4s ease;
 
     &:hover {
       background: $gradient-hover;
     }
-  }
-
-  .normal {
-    background: $gradient-normal;
-  }
-
-  .fire {
-    background: $gradient-fire;
-  }
-
-  .water {
-    background: $gradient-water;
-  }
-
-  .electric {
-    background: $gradient-electric;
-  }
-
-  .grass {
-    background: $gradient-grass;
-  }
-
-  .ice {
-    background: $gradient-ice;
-  }
-
-  .fighting {
-    background: $gradient-fighting;
-  }
-
-  .poison {
-    background: $gradient-poison;
-  }
-
-  .ground {
-    background: $gradient-ground;
-  }
-
-  .flying {
-    background: $gradient-flying;
-  }
-
-  .psychic {
-    background: $gradient-psychic;
-  }
-
-  .bug {
-    background: $gradient-bug;
-  }
-
-  .rock {
-    background: $gradient-rock;
-  }
-
-  .ghost {
-    background: $gradient-ghost;
-  }
-
-  .dragon {
-    background: $gradient-dragon;
-  }
-
-  .dark {
-    background: $gradient-dark;
-  }
-
-  .steel {
-    background: $gradient-steel;
-  }
-
-  .fairy {
-    background: $gradient-fairy;
   }
 
   button {
@@ -382,14 +450,14 @@
 
     @media (max-width: 520px) {
       font-size: 0.9rem;
+      justify-content: center;
+      gap: 1rem;
       span {
         display: none;
       }
       .pokeball {
         display: none;
       }
-      justify-content: center;
-      gap: 1rem;
     }
     @media (max-width: 250px) {
       div {

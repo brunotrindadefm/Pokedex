@@ -24,3 +24,21 @@ $gradient-steel: linear-gradient(135deg, #c4c4d0, #b8b8d0);
 $gradient-fairy: linear-gradient(135deg, #f7a7b6, #f0b6bc);
 
 $gradient-hover: linear-gradient(to right, #a1c4fd, #c2e9fb);
+
+@mixin typeStyles {
+    @include dCenter;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 0.8rem;
+    text-transform: capitalize;
+    display: inline-block;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    margin: 0.2rem;
+    transition: 0.2s ease;
+    cursor: context-menu;
+  
+    &:hover {
+      transform: scale(1.08);
+    }
+  }

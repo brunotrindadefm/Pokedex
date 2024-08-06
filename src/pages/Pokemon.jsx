@@ -5,6 +5,7 @@ import './Pokemon.scss';
 
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { CgPokemon } from "react-icons/cg";
+import PokemonCard from "../components/PokemonCard/PokemonCard";
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -21,6 +22,8 @@ const Pokemon = () => {
 
   const [nextPokemon, setNextPokemon] = useState(null)
   const [previousPokemon, setPreviousPokemon] = useState(null)
+  const [evolutionChain, setEvolutionChain] = useState(null);
+  const [evolutionImages, setEvolutionImages] = useState([])
 
   const getPokemon = async () => {
     setLoading(true);
@@ -103,33 +106,74 @@ const Pokemon = () => {
         };
       });
 
-      console.log('Type Strengths:', typeStrengths);
-
       // Inicializar conjunto de forças com todas as forças do primeiro tipo
       let combinedStrengths = new Set();
       typeStrengths.forEach(typeStrength => {
         typeStrength.doubleDamageTo.forEach(type => combinedStrengths.add(type));
       });
 
-      console.log('Combined Strengths:', [...combinedStrengths]);
-
       // Identificar forças mitigadas
       const halfAndNoDamage = new Set(
         typeStrengths.flatMap(typeStrength => [...typeStrength.halfDamageTo, ...typeStrength.noDamageTo])
       );
 
-      console.log('Half and No Damage:', [...halfAndNoDamage]);
-
       // Filtrar forças removendo as que são mitigadas
       const filteredStrengths = [...combinedStrengths].filter(type => !halfAndNoDamage.has(type));
-
-      console.log('Filtered Strengths:', filteredStrengths);
 
       // Atualizar o estado com os tipos de força
       setStrengths(filteredStrengths);
 
     } catch (error) {
       console.error('Error fetching Pokémon strengths:', error);
+    }
+  };
+
+  const getPokemonEvolutionChain = async () => {
+    try {
+      const response = await axios.get(`https://pokeapi.co/api/v2/pokemon-species/${id}`);
+      const evolutionChainUrl = response.data.evolution_chain.url;
+
+      const evolutionChainResponse = await axios.get(evolutionChainUrl);
+      setEvolutionChain(evolutionChainResponse.data);
+
+      // Função para obter imagens e tipos para todos os Pokémons na cadeia de evolução
+      const fetchImages = async (chain) => {
+        const images = [];
+        let current = chain;
+
+        while (current) {
+          try {
+            // Requisição para obter os dados do Pokémon
+            const pokemonResponse = await axios.get(`https://pokeapi.co/api/v2/pokemon/${current.species.name}`);
+
+            // Extrair os tipos do Pokémon
+            const types = pokemonResponse.data.types.map(type => type.type.name);
+
+            images.push({
+              name: current.species.name,
+              image: pokemonResponse.data.sprites.other['official-artwork'].front_default,
+              types: types
+            });
+
+            // Mover para o próximo Pokémon na cadeia de evolução
+            if (current.evolves_to.length > 0) {
+              current = current.evolves_to[0];
+            } else {
+              break;
+            }
+          } catch (error) {
+            console.error(`Error fetching data for ${current.species.name}:`, error);
+            break; // Saia do loop em caso de erro
+          }
+        }
+
+        setEvolutionImages(images);
+      };
+
+      fetchImages(evolutionChainResponse.data.chain);
+
+    } catch (error) {
+      console.error('Error fetching Pokémon evolution chain:', error);
     }
   };
 
@@ -170,6 +214,7 @@ const Pokemon = () => {
     if (pokemon) {
       getPokemonDescription();
       getPreviousAndNextPokemon();
+      getPokemonEvolutionChain();
       getPokemonWeaknesses(pokemon.types);
       getPokemonStrengths(pokemon.types);
     }
@@ -183,26 +228,28 @@ const Pokemon = () => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
 
-  console.log(nextPokemon)
+  const hasEvolution = evolutionImages.length > 0;
+  const isSingleEvolution = hasEvolution && evolutionImages.length === 1;
+  const isTwoEvolutions = hasEvolution && evolutionImages.length === 2;
 
   return (
     <div className="app">
       <div className="container">
         <div className="previous-next">
-          <button className={`previous ${previousPokemon?.types?.[0]?.type?.name}`} onClick={handlePreviousPokemon} 
+          <button className={`previous ${previousPokemon?.types?.[0]?.type?.name}`} onClick={handlePreviousPokemon}
           >
             {previousPokemon && (
               <>
                 <FaArrowLeft />
                 <div><span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {String(previousPokemon.id).padStart(4, '0')}</div>
-                <CgPokemon className="pokeball"/>
+                <CgPokemon className="pokeball" />
               </>
             )}
           </button>
-          <button  className={`next ${nextPokemon?.types?.[0]?.type?.name}`} onClick={handleNextPokemon} >
+          <button className={`next ${nextPokemon?.types?.[0]?.type?.name}`} onClick={handleNextPokemon} >
             {nextPokemon && (
               <>
-                <CgPokemon className="pokeball"/>
+                <CgPokemon className="pokeball" />
                 <div><span>{capitalizeFirstLetter(nextPokemon.name)}</span> N° {String(nextPokemon.id).padStart(4, '0')}</div>
                 <FaArrowRight />
               </>
@@ -288,6 +335,29 @@ const Pokemon = () => {
                   </li>
                 ))}
               </ul>
+            </div>
+            <div className={`evolution-chain ${isTwoEvolutions ? 'two-evolutions' : ''} ${isSingleEvolution ? 'single-evolution' : ''}`} >
+              <h4>Evolutions</h4>
+              {evolutionImages.length > 0 ? (
+                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`}>
+                 {isSingleEvolution && <p>No has evolution</p>}
+                  {evolutionImages.map((evolution, index) => (
+                    <div key={index}>
+                      <img src={evolution.image} alt={evolution.name} />
+                      <p>{capitalizeFirstLetter(evolution.name)}</p>
+                      <div className="types">
+                        {evolution.types.map((type, typeIndex) => (
+                          <span key={typeIndex} className={`type ${type}`}>
+                            {type}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <p>No evolution images available.</p>
+              )}
             </div>
           </div>
         )}
