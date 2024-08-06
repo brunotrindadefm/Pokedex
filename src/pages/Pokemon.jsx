@@ -5,7 +5,12 @@ import './Pokemon.scss';
 
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { CgPokemon } from "react-icons/cg";
-import PokemonCard from "../components/PokemonCard/PokemonCard";
+
+import Loading from "../components/Loading/Loading";
+import Error from '../components/Error/Error'
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 const Pokemon = () => {
   const { id } = useParams();
@@ -220,13 +225,11 @@ const Pokemon = () => {
     }
   }, [pokemon]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
+  useEffect(() => {
+    AOS.init();
+  },[]);
 
-  const capitalizeFirstLetter = (string) => {
-    if (!string) return '';
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
+  const capitalizeFirstLetter = (string) => string ? string.charAt(0).toUpperCase() + string.slice(1) : '';
 
   const hasEvolution = evolutionImages.length > 0;
   const isSingleEvolution = hasEvolution && evolutionImages.length === 1 || evolutionImages.length === 0;
@@ -235,7 +238,9 @@ const Pokemon = () => {
   return (
     <div className="app">
       <div className="container">
-        <div className="previous-next">
+      {loading && <Loading />}
+      {error && <Error />}
+        <div className="previous-next" data-aos="fade-in" data-aos-duration="1000">
           <button className={`previous ${previousPokemon?.types?.[0]?.type?.name}`} onClick={handlePreviousPokemon}
           >
             {previousPokemon && (
@@ -257,15 +262,15 @@ const Pokemon = () => {
           </button>
         </div>
         {pokemon && (
-          <div className="about-pokemon">
-            <div className="name-id">
+          <div className="about-pokemon" >
+            <div className="name-id" data-aos="fade-in" data-aos-duration="1000">
               <h3>{pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}</h3>
               <h4 className='id'>N° {String(pokemon.id).padStart(4, '0')}</h4>
             </div>
-            <div className="img-description">
-              <div>
-                <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} />
-                <div>
+            <div className="img-description" >
+              <div >
+                <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} data-aos="fade-in" data-aos-duration="1000" />
+                <div data-aos="fade-in" data-aos-duration="1000">
                   {pokemon.types.map((type) => (
                     <span key={type.type.name} className={`type ${type.type.name}`}>
                       {type.type.name}
@@ -273,9 +278,9 @@ const Pokemon = () => {
                   ))}
                 </div>
               </div>
-              <p className="info" dangerouslySetInnerHTML={{ __html: description }} />
+              <p className="info" dangerouslySetInnerHTML={{ __html: description }}  data-aos="fade-in" data-aos-duration="1000"/>
               <div className="text-about">
-                <div className="about">
+                <div className="about" data-aos="fade-in" data-aos-duration="1000">
                   <div>
                     <p><strong>Height</strong></p>
                     <span>{pokemon.height / 10} m</span>
@@ -290,7 +295,7 @@ const Pokemon = () => {
                   </div>
                 </div>
                 <div className="types">
-                  <div>
+                  <div data-aos="fade-in" data-aos-duration="1000">
                     <h3>Weaknesses</h3>
                     {weaknesses.length > 0 ? (
                       weaknesses.map((weakness, index) => (
@@ -302,7 +307,7 @@ const Pokemon = () => {
                       <p>No weaknesses </p>
                     )}
                   </div>
-                  <div>
+                  <div data-aos="fade-in" data-aos-duration="1000">
                     <h3>Strengths</h3>
                     {strengths.length > 0 ? (
                       strengths.map((strength, index) => (
@@ -318,13 +323,13 @@ const Pokemon = () => {
               </div>
             </div>
 
-            <div className="stats-container">
+            <div className="stats-container" data-aos="fade-in" data-aos-duration="1000">
               <h4>Stats</h4>
               <ul className="stats-list">
                 {pokemon.stats.map(stat => (
                   <li key={stat.stat.name} className="stats-item">
                     <span className="stat-name">{capitalizeFirstLetter(stat.stat.name)}:</span>
-                    <div className="stat-bar">
+                    <div className="stat-bar" data-aos="fade-in" data-aos-duration="1000">
                       <div
                         className="stat-bar-fill"
                         style={{ width: `${stat.base_stat / 2}%` }}
@@ -336,10 +341,10 @@ const Pokemon = () => {
                 ))}
               </ul>
             </div>
-            <div className={`evolution-chain ${isTwoEvolutions ? 'two-evolutions' : ''} ${isSingleEvolution ? 'single-evolution' : ''}`} >
+            <div className={`evolution-chain ${isTwoEvolutions ? 'two-evolutions' : ''} ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000" >
               <h4>Evolutions</h4>
               {evolutionImages.length > 0 ? (
-                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`}>
+                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000">
                   {isSingleEvolution && <p>No has evolution</p>}
                   {evolutionImages.map((evolution, index) => (
                     <div key={index}>
@@ -356,9 +361,9 @@ const Pokemon = () => {
                   ))}
                 </div>
               ) : (
-                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`}>
+                <div className={`evolution-list ${isSingleEvolution ? 'single-evolution' : ''}`} data-aos="fade-in" data-aos-duration="1000">
                   <p>No has evolution</p>
-                  <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name} />
+                  <img src={pokemon.sprites.other['official-artwork'].front_default} alt={pokemon.name}  />
                   <p>{capitalizeFirstLetter(pokemon.name)}</p>
                   <div className="types">
                     {pokemon.types.map((type) => (

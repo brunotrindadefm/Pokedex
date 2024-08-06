@@ -2,8 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import PokemonCard from "../components/PokemonCard/PokemonCard";
 
-import './Home.scss'
 import Loading from "../components/Loading/Loading";
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'; 
+
+import './Home.scss'
 
 const Home = () => {
   const [data, setData] = useState([]);
@@ -40,22 +44,23 @@ const Home = () => {
 
   useEffect(() => {
     getPokemons();
+    AOS.init()
   }, [limit, offset]);
 
   const morePokemons = () => {
-    setOffset((prevOffset) => prevOffset + limit);  // Recurso para carregar mais a partir do que você já tem
+    setOffset((prevOffset) => prevOffset + limit);  // Recurso para carregar mais a partir do que já tem
   };
 
   return (
     <div className="app">
-      <div className="container" key={data.id}>
+      <div className="container" data-aos="fade-in" data-aos-duration="1000" key={data.id}>
         {loading && <Loading />}
         {error && <p>{error.message}</p>}
-        {data.length > 0 && data.map((pokemon) => (
+        {!loading && data.length > 0 && data.map((pokemon) => (
           <PokemonCard pokemon={pokemon} />
         ))}
-        {!loading && <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button>}
       </div>
+      {!loading && <button className="more-pokemons" onClick={morePokemons} disabled={loading}>More Pokémons</button>}
     </div>
   );
 };
