@@ -263,9 +263,9 @@
     }
 
     &.two-evolutions {
-      width: 70%;
+      width: 740px;
       @media(max-width: 900px) {
-        width: 50%;
+        width: 55%;
       }
       @media(max-width: 540px) {
         width: 100%;
@@ -273,10 +273,10 @@
     }
 
     &.single-evolution {
-      width: 60%;
+      width: 500px;
       flex-direction: column;
       @media(max-width: 900px) {
-        width: 50%;
+        width: 55%;
       }
       @media(max-width: 540px) {
         width: 100%;
