@@ -7,7 +7,6 @@ import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { CgPokemon } from "react-icons/cg";
 
 import Loading from "../components/Loading/Loading";
-import Error from '../components/Error/Error'
 
 import AOS from 'aos';
 import 'aos/dist/aos.css'
@@ -256,7 +255,7 @@ const Pokemon = () => {
             {previousPokemon && (
               <>
                 <FaArrowLeft />
-                <div><span>{capitalizeFirstLetter(previousPokemon.name)}</span> N° {String(previousPokemon.id).padStart(4, '0')}</div>
+                <div> N° {String(previousPokemon.id).padStart(4, '0')} <span>{capitalizeFirstLetter(previousPokemon.name)}</span></div>
                 <CgPokemon className="pokeball" />
               </>
             )}
@@ -292,15 +291,19 @@ const Pokemon = () => {
               <p className="info" dangerouslySetInnerHTML={{ __html: description }} data-aos="fade-in" data-aos-duration="1000" />
               <div className="text-about">
                 <div className="about" data-aos="fade-in" data-aos-duration="1000">
-                  <div>
+                  <div className="pokemon-stats">
                     <p><strong>Height</strong></p>
                     <span>{pokemon.height / 10} m</span>
+                  </div>
+                  <div className="pokemon-stats">
                     <p><strong>Weight</strong></p>
                     <span>{pokemon.weight / 10} kg</span>
                   </div>
-                  <div>
+                  <div className="pokemon-stats">
                     <p><strong>Category</strong></p>
                     <span>{category}</span>
+                  </div>
+                  <div className="pokemon-stats">
                     <p><strong>Ability</strong></p>
                     <span>{pokemon.abilities.length > 0 ? capitalizeFirstLetter(pokemon.abilities[0].ability.name) : 'No abilities available'}</span>
                   </div>
@@ -361,7 +364,7 @@ const Pokemon = () => {
                     <div key={index}>
                       <img src={evolution.image} alt={evolution.name} onClick={() => handleClickedPokemon(evolution.id)} />
                       <p className="id-name">{capitalizeFirstLetter(evolution.name)}
-                      <span>N° {String(evolution.id).padStart(4, '0')}</span></p>
+                        <span>N° {String(evolution.id).padStart(4, '0')}</span></p>
                       <div className="types">
                         {evolution.types.map((type, typeIndex) => (
                           <span key={typeIndex} className={`type ${type}`}>
